@@ -1,0 +1,32 @@
+package pe.edu.upao.PropiedadService.Controller;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import pe.edu.upao.PropiedadService.Entity.Propiedad;
+import pe.edu.upao.PropiedadService.Service.PropiedadService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/propiedad")
+@RequiredArgsConstructor
+public class PropiedadController {
+
+    private final PropiedadService propiedadService;
+
+    @GetMapping("/listarPropiedades")
+    public ResponseEntity<List<Propiedad>> listarPropiedades() {
+        List<Propiedad> propiedades =propiedadService.listarPropiedades();
+        return ResponseEntity.ok(propiedades);
+    }
+
+    @GetMapping("/listarPropiedad/{id}")
+    public ResponseEntity<Propiedad> obtenerPropiedadPorId(@PathVariable Long id) {
+        Propiedad propiedad = propiedadService.obtenerPropiedadPorId(id);
+        return ResponseEntity.ok(propiedad);
+    }
+}
