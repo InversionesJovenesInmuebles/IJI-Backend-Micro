@@ -42,6 +42,8 @@ public class Propiedad {
     private int cantDormitorios;
     private int cantCochera;
 
+    private Long idAgente;
+
     @OneToMany(mappedBy = "propiedad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Foto> fotos;

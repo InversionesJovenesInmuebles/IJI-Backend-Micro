@@ -1,6 +1,7 @@
 package pe.edu.upao.PropiedadService.Controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,5 +29,14 @@ public class PropiedadController {
     public ResponseEntity<Propiedad> obtenerPropiedadPorId(@PathVariable Long id) {
         Propiedad propiedad = propiedadService.obtenerPropiedadPorId(id);
         return ResponseEntity.ok(propiedad);
+    }
+
+    @GetMapping("/listarPropiedadesAgente/{idAgente}")
+    public ResponseEntity<List<Propiedad>> listarPropiedadesAgente(@PathVariable Long idAgente) {
+        List<Propiedad> propiedad = propiedadService.listarPropiedadesPorAgente(idAgente);
+        if (propiedad.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(propiedad, HttpStatus.OK);
     }
 }
